@@ -1,0 +1,95 @@
+[
+    {
+        "name": "Logements loin des aéroports",
+        "elementTypes": ["maison", "petitCollectif", "grandCollectif", "densification"],
+        "others": ["airports"],
+        "constraint": "notInside",
+        "msg": "Votre projet se situe dans la zone de bruit de l'aéroport, il faudra donc être attentif à la façon dont les logements seront développés pour protéger leurs occupants"
+    },
+    {
+        "name": "Logements en zone dense",
+        "elementTypes": ["maison", "petitCollectif", "grandCollectif"],
+        "others": ["zu"],
+        "constraint": "notInside",
+        "msg": "En zone urbaine, l'idéal est de privilégier la densification."
+    },
+    {
+        "name": "Logements proches transports",
+        "elementTypes": ["petitCollectif", "grandCollectif", "densification"],
+        "others": ["transports"],
+        "constraint": "maxDist",
+        "distance": 5000,
+        "msg": "Les logements plus proches des stations de transports en commun"
+    },
+    {
+        "name": "Maisons loin gare",
+        "elementTypes": ["maison"],
+        "others": ["transports"],
+        "constraint": "minDist",
+        "distance": 5000,
+        "msg": "L'idéal est de permettre au plus grand nombre d'habiter à proximité des gares, la maison individuelle n'est peut-être pas la solution optimale"
+    },
+    {
+        "name": "Emplois proches transports",
+        "elementTypes": ["usine", "tertiaire", "artisanat"],
+        "others": ["transports"],
+        "constraint": "maxDist",
+        "distance": 5000,
+        "msg": "L'idéal est de permettre aux salariés de rejoindre leur lieu de travail en transports en commun"
+    },
+    {
+        "name": "Industries proches logistiques",
+        "elementTypes": ["usine"],
+        "others": ["logistics"],
+        "constraint": "maxDist",
+        "distance": 5000,
+        "msg": "La localisation des emplois industriels à proximité des pôles logistiques est idéale"
+    },
+    {
+        "name": "Culture/social proches logements",
+        "elementTypes": ["culture"],
+        "others": ["petitCollectif", "grandCollectif", "densification"],
+        "constraint": "maxDist",
+        "distance": 2000,
+        "msg": "Les centres sociaux et culturels ont par essence vocation à se trouver à proximité des logements"
+    },
+    {
+        "name": "Culture/social accessibles",
+        "elementTypes": ["culture", "ecole", "social"],
+        "others": ["transports"],
+        "constraint": "maxDist",
+        "distance": 2000,
+        "msg": "Les usagers de ces équipements ne pourront pas venir en transports en commun"
+    },
+    {
+        "name": "Parcs proches logements",
+        "elementTypes": ["parcs"],
+        "others": ["petitCollectif", "grandCollectif", "densification"],
+        "constraint": "maxDist",
+        "distance": 2000,
+        "msg": "Les espaces verts sont plus utiles près des nouveaux logements collectifs"
+    },
+    {
+        "name": "Vert loin des gares",
+        "elementTypes": ["agriculture", "forets"],
+        "others": ["transports"],
+        "constraint": "minDist",
+        "distance": 2000,
+        "msg": "Vert loin des transports"
+    },
+    {
+        "name": "Vert pas en ville",
+        "elementTypes": ["usine"],
+        "others": ["zu"],
+        "constraint": "notInside",
+        "msg": "L'implantation d'emplois industriels est souvent génératrice de nuisances, il convient de choisir la localisation des industries avec soin"
+    },
+    {
+        "name": "Equipements",
+        "elementTypes": ["culture", "ecole", "social", "parcs"],
+        "others": ["zu"],
+        "constraint": "inside",
+        "msg": "L'implantion de ces équipements doit plutôt profiter aux espaces urbains"
+    }
+]
+

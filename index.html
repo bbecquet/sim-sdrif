@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Sim SDRIF</title>
+		<link rel="stylesheet" href="css/normalize.css"/>
+		<link rel="stylesheet" href="css/style.css"/>
+		
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
+		        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        
+        <script src="http://maps.google.com/maps/api/js?sensor=true&libraries=geometry,drawing,"></script>
+        
+        <script src="js/infobox_packed.js"></script>
+        <script src="js/GeoJSON.js"></script>
+        <script src="js/ConstraintManager.js"></script>
+        <script src="js/ObjectiveManager.js"></script>
+        <script src="js/main.js"></script>
+	
+	</head>
+	<body>
+        <div id="intro">
+<div id="intro_contain">
+<h1><img src="img/home.png"></h1><div id="bar"><div id="percent"></div></div>
+<br/><p><span>Logements, emplois, équipements, nature, donnez vous aussi votre vision pour l'Île-de-France 2030 !</span></p>
+</div>
+<div id="footer"><img src="img/sncf.jpg"><img src="img/ratp.gif"><img src="img/ile-de-france.jpg"><img src="img/IAU.gif"></div>
+</div>
+		<div id="menu">
+			<div id="logo"></div>
+			<div id="missions">
+			    <h1>Missions</h1>
+			    <ul>
+			        <li>Construire 70000 logements par an.</li>
+			        <li>Créer 28 000 emplois par an.</li>
+			        <li>Garantir l'accès aux équipements.</li>
+			        <li>Conforter l'écosystème naturel.</li>
+			    </ul>
+			    <a id="plus" href="#">En savoir plus +</a>
+			</div>
+			<ul id="actions">
+			    <li>
+			    <a href="#habitat">
+				    Habitat
+				    <div class="total"><div id="prog_habitat"></div></div>
+			    </a>
+				</li>
+				<li>
+				<a href="#emploi">
+					Emplois
+				    <div class="total"><div id="prog_emploi"></div></div>
+				</a>
+				</li>
+				<li>
+				<a href="#equipement">
+					Équipements
+				    <div class="total"><div id="prog_equipement"></div></div>
+				</a>
+				</li>
+				<li>
+				<a href="#espace_vert">
+					Espaces ouverts
+				    <div class="total"><div id="prog_espace"></div></div>
+				</a>
+				</li>
+				<li>
+					<input type="button" value="Valider la mission" onclick=/>
+				</li>
+			</ul>
+		</div>
+		<div id="subactions">
+		    <ul id="habitat" class="sous-liste">
+		        <li id="elt_maison"><div>Maisons individuelles</span><span class="value"><span class="v"></span> logements</span></div></li>
+		        <li id="elt_petitCollectif"><div>Petits collectifs<span class="value"><span class="v"></span> logements</span></div></li>
+		        <li id="elt_grandCollectif"><div>Grands collectifs<span class="value"><span class="v"></span> logements</span></div></li>
+		        <li id="elt_densification"><div>Densification<span class="value"><span class="v"></span> logements</span></div></li>
+	        </ul>			
+			<ul id="emploi" class="sous-liste">
+				<li id="elt_usine"><div>Industrie<span class="value"><span class="v"></span> emplois</span></div></li>
+				<li id="elt_tertiaire"><div>Services<span class="value"><span class="v"></span> emplois</span></div></li>
+				<li id="elt_artisanat"><div>Artisanat<span class="value"><span class="v"></span> emplois</span></div></li>
+			</ul>
+			<ul id="equipement" class="sous-liste">
+				<li id="elt_culture"><div>Culture<span class="value">équipement/<span class="v"></span> h.</span></div></li>
+				<li id="elt_ecole"><div>École / Enseignement<span class="value">équipement/<span class="v"></span> h.</span></div></li>
+				<li id="elt_social"><div>Centre social de proximité<span class="value">équipement/<span class="v"></span> h.</span></div></li>
+			</ul>
+			<ul id="espace_vert" class="sous-liste">
+				<li id="elt_agriculture"><div>Agriculture<span class="value">nourriture/<span class="v"></span> h.</span></div></li>
+				<li id="elt_parcs"><div>Parcs<span class="value">équipement/<span class="v"></span> h.</span></div></li>
+				<li id="elt_forets"><div>Forêts<span class="value"><span class="v"></span> arbres</span></div></li>
+			</ul>
+		</div>
+		<div id="map"></div>
+		<div id="message"></div>
+		
+		<form id="location">
+		    <input id="address" autocomplete="off" placeholder="Ville en Île-de-France"/>
+		</form>
+		
+		<!-- TODO: clean up! -->
+		<div id="diapo">
+			<div id="view">
+				<div id="gauche" class="slideArrow"></div>
+				<div id="droite" class="slideArrow"></div>
+				<!--<img id="points" src="img/indic_inactif.png">
+				<img id="actif" src="img/indic_actif.png">-->
+				<img id="fermer" src="img/fermer_inac.png" onmouseover="(this).src='img/fermer_hover.png'" onmouseout="(this).src='img/fermer_inac.png'">
+
+              <ul id="slide">
+              	<li>
+              		<img alt="" src="img/whatis.png" class="whatis" />
+              		<h2>Schéma directeur de la région Ile-de-France</h2>
+              		<p>Le Schéma directeur Île-de-France 2030 porte le projet de la transition de l’aménagement régional. Il est conçu à l’aune du développement durable, dans la perspective des décennies à venir.<br/>
+Il est établi en association avec l’État et le Conseil économique, social et environnemental régional, en concertation avec l’ensemble des collectivités et des acteurs d’Île-de-France, et en lien avec le Bassin
+parisien. Il vise à l’attractivité et au rayonnement francilien et place au cœur de ses préoccupations le cadre de vie et le quotidien du Francilien de 2013 et de demain.<br/>
+Car planifier l’avenir du développement territorial à l’horizon 2030, c’est apporter des réponses aux modes de vie actuels et futurs des Franciliennes et des Franciliens en termes de mobilité, d’habitat,</p>
+              	</li>
+             
+                <li>
+                  <p>d’emploi, de relation à leur environnement, aux usages qu’ils ont et auront de leurs lieux de vie, en termes de pratiques sociales, culturelles,récréatives, sportives.<br/>
+C’est apporter des réponses concrètes aux conditions de leur épanouissement individuel au sein d’une même communauté de destin en termes de déplacements, travail, formation, logement, environnement, services publics, équipements publics et privés. C’est aussi apporter des réponses aux conditions de cet épanouissement dans un monde où les disparités sociales et les inégalités territoriales,parfois les ségrégations, s’aggravent.</p>
+                </li>
+             
+                <li>
+                  <h2>L'habitat</h2>
+                  <p><strong>Mission : construire 70 000 logements par an et améliorer le parc existant pour résoudre la crise du logement.</strong></p><p>
+Le logement, fondement de l’équité –sociale et territoriale– mais aussi de l’attractivité, appelle une production massive et de qualité, notamment dans le secteur social locatif. Face à l’aggravation de la crise du logement, l’objectif régional porte son ambition sur un effort de création de 70 000 logements par an en moyenne, soit près de 1,5 million de nouveaux logements à l’horizon 2030. <br/>
+Viser la construction de 70 000 logements par an pour répondre aux besoins actuels de logements des ménages et anticiper leurs demandes futures est une urgence absolue, sociale et économique. C’est l’objectif premier du schéma directeur.
+</p>
+                </li>
+              <li>
+                <img src="img/logement.png" alt="" class="imglog" />
+              </li>
+                <li>
+                  <h2>L'emploi</h2>
+                  <p><strong>Mission : Créer 28 000 emplois par an, un objectif ambitieux pour lutter contre le chomage.</strong></p><p>
+Sur 20 ans (1990-2010), en incluant la période de crise récente, la progression annuelle d’emplois se situe autour de 25 000 emplois par an. Ce n’est pas suffisant pour faire baisser le nombre de chômeurs et permettre au plus grand nombre d’accéder à un emploi stable et durable. La réduction des inégalités sociales passe par un objectif de création d’emploi important, cohérent avec les perspectives démographiques.<br/>
+L’objectif est aussi de favoriser un rapprochement de la géographie de l’emploi et du développement de l’offre de logements afin d’améliorer les conditions d’accès à l’emploi des Franciliens et de réduire le temps moyen consacré aux navettes domicile-travail par les actifs de la région.
+</p>
+                </li>
+              <li>
+                <img src="img/emploi.png" alt="" class="imgemp" />
+              </li>                <li>
+                  <h2>Les équipements</h2>
+                  <p><strong>Mission : garantir l'accès à des équipements de qualité pour 50 000 nouveaux habitants.</strong></p><p>
+Les équipements et les services publics jouent un rôle structurant pour l’aménagement de l’espace. Leur création ne se réduit pas à leur simple implantation, mais aussi à leur accompagnement par des services, une animation, un environnement qui les rendent proches et praticables pour tous les Franciliens.<br/>
+Ils participent directement de la mixité sociale et de la mixité des fonctions urbaines, en encourageant une proximité et un équilibre entre logements, activités et équipements – que cela soit dans les espaces de densification ou d’extension urbaine – afin de garantir des lieux de vie fonctionnels et agréables à partager.
+</p>
+                </li>
+              
+                <li>
+                  <h2>Les espaces ouverts</h2>
+                  <p><strong>Mission : conforter l'écosystème naturel</strong></p><p>
+L’Île-de-France a la chance d’être une grande région naturelle et agricole (53% du territoire régional sont occupés par la surface agricole).
+L’agriculture francilienne est un atout majeur pour la région. Le contexte de transition écologique en fait, plus que jamais, un potentiel d’innovation et de renouvellement industriel.<br/>
+L’Île-de-France compte environ 5000 exploitations agricoles,les trois quarts en grandes cultures (céréales, oléoprotéagineux, betteraves), qui cultivent plus de 90% de la surface agricole régionale. Les autres filières (élevage, maraîchage, arboriculture, horticulture, etc.) même si elles représentent seulement 10% des terres agricoles, apportent une diversité de productions essentielle pour l’Île-de-France.
+</p>
+                </li>
+              <li>
+                <img src="img/espace.png" alt="" class="imgesp" />
+              </li>
+            </div>
+        </div>
+        <script>
+        	$('#droite').on('click',function(){
+                $('#slide').animate({
+                    left: '-=415px'
+                },600);
+            });
+            $('#gauche').on('click',function(){
+                $('#slide').animate({
+                    left: '+=415px'
+                },600);
+            });
+            $('#fermer').on('click',function(){
+                $('#diapo').hide();
+            })
+            $('#plus').on('click',function(){
+                $('#slide').css({
+                    left: 35
+                });
+                $('#diapo').show();
+            });
+        </script>
+	</body>
+</html>
+

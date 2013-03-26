@@ -1,0 +1,22 @@
+{
+    "habitat": {
+        "domId": "prog_habitat",
+        "obj": 70000,
+        "value": 0
+    },
+    "emploi": {
+        "domId": "prog_emploi",
+        "obj": 28000,
+        "value": 0
+    },
+    "equipement": {
+        "domId": "prog_equipement",
+        "obj": 50000,
+        "value": 0
+    },
+    "espace_vert": {
+        "domId": "prog_espace",
+        "obj": 50000,
+        "value": 0
+    }
+}
