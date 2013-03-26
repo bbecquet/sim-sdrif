@@ -8,7 +8,7 @@ Projet réalisé pendant le Hack Data Week-End « Île-de-France 2030 » - http:
 * Benjamin Becquet - Cartographe / Géomaticien / Développeur
 * Fabien Cazals - Graphiste / Designer
 * Anne Gerstlé - Urbaniste
-* Manuel - Développeur
+* Manuel Lemaire - Développeur
 
 ## Licence
 
